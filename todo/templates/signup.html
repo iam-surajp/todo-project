@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    body{
+    background: url("/static/images/todo.avif");
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:left;
+    }
+</style>
+
+
+    <div class="d-flex justify-content-center w-50 mt-10 p-5">
+        <h2 style='color:DodgerBlue'>Register</h2> 
+    </div>
+    <div class="container w-70">
+        <div class="card border border-dark rounded p-3 w-50">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" ><b style="color: black;">Username</b></label>                
+                    <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter name">
+                    <small id="usernameHelp" class="form-text text-muted">Enter a unique username. This will be used for login.</small>
+                </div>
+                <div class="form-group">
+                    <label for="username" ><b style="color: black;">Password</b></label>             
+                    <input type="password" name="password1" class="form-control" id="password1" placeholder="Enter password">
+                    <small id="passwordHelp" class="form-text text-muted">Choose a strong password with at least 8 characters.</small>
+                </div>
+                <div class="form-group">
+                    <label for="password2"><b style="color: black;">Confirm Password</b></label>
+                    <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm password">
+                </div>
+                <div style='display:flex;justify-content:center'>
+                <button type="submit" class="btn btn-success">Register</button>
+                </div>
+            </form>
+            <hr>
+            <div class="text-center">
+                <b style="color: red">Do you already have an account?</b><a href="{% url 'login' %}"><b style="color:navy;"> Login Here</b></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

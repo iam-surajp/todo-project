@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body{
+    background: url("/static/images/todo.avif");
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:left;
+    }
+</style>
+<div class="d-flex justify-content-center w-50 mt-15 p-5">
+    <h2 style='color:DodgerBlue'>Login</h2>
+</div>
+<div class='container w-70'>
+        <div class="card border border-dark rounded p-3 w-50">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" ><b style="color: black;">Username</b></label>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password" ><b style="color: black;">Password</b></label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <div style='display:flex;justify-content:center'>
+                <button type="submit" class="btn btn-success">Login</button>
+                </div>           
+            </form>
+            <hr>
+            <div class="text-center">
+                <b style="color: red">Don't have an account ?</b><a href="{% url 'signup' %}"><b style="color:navy;"> Register Here</b></a>
+            </div>
+        </div>
+</div> 
+{% endblock %}

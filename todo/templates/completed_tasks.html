@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10 text-muted d-flex justify-content-center">
+            <h1>Completed Tasks</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <div class="list-group">
+                {% if todos.count == 0 %}
+                    <h2>There are no tasks in the history</h2>
+                
+                {%else%}
+                    {% for todo in todos %}
+                    <div class='container mb-2'>
+                    <a class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b> - Completed {{ todo.datecompleted|date:'M j Y H:i' }}</a>
+                    </div>
+                    {% endfor %}
+                {%endif%} 
+            </div>
+        </div>
+    </div>
+{% endblock %}

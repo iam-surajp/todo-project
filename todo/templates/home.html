@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+    <div class="container shadow-lg p-3 mb-5 bg-white rounded mt-5">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                {% if tasks %}
+                    <div class="text-center text-success">
+                        <h1>Hii {{request.user}}, You have {{ tasks.count }} task{{ tasks.count|pluralize }} to do</h1>
+                    </div>
+                    <div class='text-muted pt-5'><h6>* The important tasks will be highlighted</h6></div>
+                {% else %}
+                    <div class="text-center">
+                        <h1>Hi, {{request.user}}!</h1>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-md-10">
+                {% if tasks %}
+                    <div class="list-group w-100" style="max-height:500px;overflow-y:auto">
+                        {% for task in tasks %}
+                           <div class='container mb-2'>
+                            <a href="{% url 'view-task' task.id %}" class="list-group-item list-group-item-action{% if task.important %} list-group-item-warning{% endif %}">
+                                <h5 class="mb-1 text-primary">{{ task.title }}</h5>
+                                {% if task.desc %}
+                                    <p class="mb-1">{{ task.desc|truncatechars:50 }}</p>
+                                {% endif %}
+                            </a>
+                           </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center">
+                        <h4 class="text-muted">You currently don't have any tasks to do! Great work.</h4>
+                        <a role="button" class="btn btn-info mt-3" href="{% url 'add-task' %}">New Task</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
